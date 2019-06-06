@@ -11,10 +11,9 @@ VoxelFactory can be used for anything in your project that needs procedural mesh
 
 
 ## Installation
-
-You can install this library manually using the provided dll file or you can also install it by downloading the nuget package.
-
-
+Just import the source `VoxelFactory.cs` class to your project. 
+Nuget package and `dll` coming soon.
+GDscript version coming soon.
 
 ## Exemples
 
