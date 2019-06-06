@@ -88,12 +88,12 @@ This will create a mesh from a Sprite node. It will use the sprite texture as an
 
 Create a `Mesh` from the current data in the VoxelFactory. Use this if you are adding Voxels manually.
 
-- `void` AddVoxel(`int` x, `int` y , `int` z, `Color` color, [overwrite])
+- `void` AddVoxel(`int` x, `int` y , `int` z, `Color` color, [`bool` overwrite = false])
 - `void` AddVoxel(`Vector3` position, `Color` color)
 
 Add a voxel at a specified position with a color to the VoxelFactory dataset. You can either use a Vector3 for the position or specify them one by one. You can specify if you want to overwrite if a voxel already exists at the position specified
 
-- `void` AddVoxels(Dictionary<`Vector3`, `Color`>, [overwrite])
+- `void` AddVoxels(Dictionary<`Vector3`, `Color`>, [`bool` overwrite = false])
 
 Add a bunch of voxels all at once that are in a Dictionary with the position as the key, and the color as the value. You can specify if you want to overwrite if a voxel already exists at the position specified
 
