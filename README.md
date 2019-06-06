@@ -1,4 +1,4 @@
-# Voxel Factory
+# Voxel Factory 📦 :factory: 
 
 > Voxel Factory is a simple Godot C# library that allows you to create voxel mesh easily using cubes. It handles the meshing for you and optimize it. 
 
