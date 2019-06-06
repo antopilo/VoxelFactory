@@ -1,14 +1,16 @@
 using Godot;
-
-public struct Voxel{
-    public Color color;
-}
+using System;
+using System.Collections.Generic;
 
 public class VoxelFactory
 {
     public float VoxelSize = 1f;
-    public Material Material = new Material();
-    private Dictionnary<Vector3, Voxel> Voxels;
+    public Material DefaultMaterial = new SpatialMaterial() 
+    {
+        VertexColorUseAsAlbedo = true 
+    };
+
+    private Dictionary<Vector3, Color> Voxels = new Dictionary<Vector3, Color>();
     private SurfaceTool SurfaceTool = new SurfaceTool();
     
     // Cube vertices
@@ -19,91 +21,110 @@ public class VoxelFactory
         new Vector3(1, 1, 1), new Vector3(0, 1, 1) 
     };
 
-
     // FromImageData
-    public void CreateMeshFromPNG(ImageData data)
+    public Mesh CreateMeshFromIMG(string path)
     {
+        // Load image
+        var image = new Image();
+        image.Load(path);
 
+        return CreateMeshFromImage(image);
     }
 
     // SpriteNode
-    public void CreateMeshFromSprite(Sprite sprite)
+    public Mesh CreateMeshFromSprite(Sprite sprite)
     {
-
+        var image = sprite.Texture.GetData();
+        return CreateMeshFromImage(image);
     }
 
-    // Read MagicaVoxel file.
-    public void CreateMeshFromMagica(string path)
-    {
 
+    private Mesh CreateMeshFromImage(Image image)
+    {
+        Voxels.Clear();
+        var imageSize = image.GetSize();
+
+        // Flip because its upside down by default, and lock it.
+        image.FlipY(); 
+        image.Lock();
+
+        // Create data.
+        for(int x = 0; x < imageSize.x; x++)
+            for(int y = 0; y < imageSize.y; y++)
+                AddVoxel(x, y, 0, image.GetPixel(x, y));
+
+        // Unlock and return the mesh.
+        image.Unlock();
+        return CreateMesh();
     }
 
-     // Adds a new Voxel to the dataset.
-    public void AddVoxel(Vector3 position, Color color)
+
+    public void AddVoxel(Vector3 position, Color color, bool overwrite = false)
     {
-        Voxel voxel = new Voxel();
-        voxel.color = color;
-        Voxels.Add(position, voxel);
+        if(color.a == 0f)
+            return;
+
+        if(Voxels.ContainsKey(position) && overwrite)
+            Voxels[position] = color;
+        else if(!Voxels.ContainsKey(position))
+            Voxels.Add(position, color);
     }
 
-    public void AddVoxel(int x, int y, int z, Color color)
+
+    public void AddVoxel(int x, int y, int z, Color color, bool overwrite = false)
     {
         var position = new Vector3(x, y, z);
-        var voxel = new Voxel();
-        voxel.color = color;
-        Voxels.Add(position, voxel);
+        AddVoxel(position, color, overwrite);
     }
 
 
-    public void AddVoxels(Dictionnary<Vector3, Voxel> voxels, bool overrideVox = false)
+    public void AddVoxels(Dictionary<Vector3, Color> voxels, bool overrideVox = false)
     {
-        if(overrideVox)
+        foreach(Vector3 v in voxels.Keys)
         {
-            foreach(var v in voxels.Keys)
+            if(overrideVox)
+                AddVoxel(v, voxels[v]);
+            else if(!Voxels.ContainsKey(v))
                 AddVoxel(v, voxels[v]);
         }
-        else
-        {
-            foreach(var v in voxels.Keys)
-            {
-               if(!Voxels.ContainsKey(v))
-                   AddVoxel(v, voxels[v]);
-            }
-        }
+    }
+
+    public void ClearVoxels()
+    {
+        Voxels.Clear();
     }
 
 
-    private Mesh CreateMesh()
+    public Mesh CreateMesh()
     {
         SurfaceTool.Begin(Mesh.PrimitiveType.Triangles);
-        Material mat = VoxMaterial as Material;
-        SurfaceTool.SetMaterial(mat);
+        SurfaceTool.SetMaterial(DefaultMaterial);
 
-        foreach(Voxel voxel in Voxels)
-            CreateVoxel(voxel);
-
+        foreach(var voxel in Voxels.Keys)
+            CreateVoxel(Voxels[voxel], voxel);
+        
         SurfaceTool.Index();
         return SurfaceTool.Commit();
     }
 
-    private void CreateVoxel(Voxel voxel)
+    private void CreateVoxel(Color color, Vector3 position)
     {
-        bool left   = !Voxels.ContainsKey(voxel.position - new Vector3(1, 0, 0));
-        bool right  = !Voxels.ContainsKey(voxel.position + new Vector3(1, 0, 0));
-        bool back   = !Voxels.ContainsKey(voxel.position - new Vector3(1, 0, 0));
-        bool front  = !Voxels.ContainsKey(voxel.position + new Vector3(0, 0, 1));
-        bool top    = !Voxels.ContainsKey(voxel.position - new Vector3(0, 1, 0));
-        bool bottom = !Voxels.ContainsKey(voxel.position + new Vector3(1, 0, 0));
+        bool left   = !Voxels.ContainsKey(position - new Vector3(1, 0, 0));
+        bool right  = !Voxels.ContainsKey(position + new Vector3(1, 0, 0));
+        bool back   = !Voxels.ContainsKey(position - new Vector3(0, 0, 1));
+        bool front  = !Voxels.ContainsKey(position + new Vector3(0, 0, 1));
+        bool top    = !Voxels.ContainsKey(position + new Vector3(0, 1, 0));
+        bool bottom = !Voxels.ContainsKey(position - new Vector3(0, 1, 0));
 
         if (left && right && front && back && top && bottom)
             return;
 
-        pSurfaceTool.AddColor(voxel.color);
+        SurfaceTool.AddColor(color);
                 
-        Vector3 vertexOffset = new Vector3(x, y, z);
+        Vector3 vertexOffset = position;
         if (top) // Above
         {
-            SurfaceTool.AddNormal(new Vector3(0, 1, 0));
+            SurfaceTool.AddNormal(new Vector3(0, -1, 0));
             SurfaceTool.AddVertex(Vertices[4] + vertexOffset);
             SurfaceTool.AddVertex(Vertices[5] + vertexOffset);
             SurfaceTool.AddVertex(Vertices[7] + vertexOffset);
