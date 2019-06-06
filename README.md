@@ -62,6 +62,8 @@ If you have a sprite node that has a texture that you want to extrude.
 | Mesh        | CreateMesh           |
 | void        | AddVoxel             |
 | void        | AddVoxels            |
+| void        | ClearVoxels          |
+
 
 #### Propreties Descriptions
 
