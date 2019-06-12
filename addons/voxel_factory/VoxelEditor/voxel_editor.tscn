@@ -44,36 +44,42 @@ margin_right = 1024.0
 margin_bottom = 25.0
 
 [node name="new" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_right = 98.0
+margin_right = 30.0
 margin_bottom = 25.0
 hint_tooltip = "Open a new mesh(.tres)"
 text = "New mesh"
 icon = ExtResource( 2 )
+flat = true
+clip_text = true
 align = 0
 
 [node name="Button" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 102.0
-margin_right = 167.0
+margin_left = 34.0
+margin_right = 64.0
 margin_bottom = 25.0
 hint_tooltip = "Open a new mesh(.tres)"
 focus_mode = 0
 text = "Open"
 icon = ExtResource( 3 )
+flat = true
+clip_text = true
 align = 0
 
 [node name="Button2" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 171.0
-margin_right = 230.0
+margin_left = 68.0
+margin_right = 98.0
 margin_bottom = 25.0
 hint_tooltip = "Save the current mesh"
 focus_mode = 0
 text = "Save"
 icon = ExtResource( 4 )
+flat = true
+clip_text = true
 align = 0
 
 [node name="Button3" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 234.0
-margin_right = 293.0
+margin_left = 102.0
+margin_right = 161.0
 margin_bottom = 25.0
 hint_tooltip = "Save the current mesh as"
 focus_mode = 0
@@ -81,13 +87,13 @@ text = "Save as"
 align = 0
 
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 297.0
-margin_right = 301.0
+margin_left = 165.0
+margin_right = 169.0
 margin_bottom = 25.0
 
 [node name="PenTool" type="TextureButton" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 305.0
-margin_right = 330.0
+margin_left = 173.0
+margin_right = 198.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 25, 25 )
 hint_tooltip = "Pen tool"
@@ -101,8 +107,8 @@ expand = true
 stretch_mode = 3
 
 [node name="EraseTool" type="TextureButton" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 334.0
-margin_right = 359.0
+margin_left = 202.0
+margin_right = 227.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 25, 25 )
 hint_tooltip = "Eraser tool"
@@ -115,8 +121,8 @@ expand = true
 stretch_mode = 3
 
 [node name="MoveTool" type="TextureButton" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 363.0
-margin_right = 388.0
+margin_left = 231.0
+margin_right = 256.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 25, 25 )
 hint_tooltip = "Move tool"
@@ -129,8 +135,8 @@ expand = true
 stretch_mode = 3
 
 [node name="ColorPickerTool" type="TextureButton" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 392.0
-margin_right = 417.0
+margin_left = 260.0
+margin_right = 285.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 25, 25 )
 hint_tooltip = "Color picker
@@ -144,19 +150,19 @@ expand = true
 stretch_mode = 3
 
 [node name="VSeparator2" type="VSeparator" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 421.0
-margin_right = 425.0
+margin_left = 289.0
+margin_right = 293.0
 margin_bottom = 25.0
 
 [node name="Name" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 429.0
+margin_left = 297.0
 margin_top = 5.0
-margin_right = 467.0
+margin_right = 335.0
 margin_bottom = 19.0
 text = "Name"
 
 [node name="NameEdit" type="LineEdit" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 471.0
+margin_left = 339.0
 margin_right = 987.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 50, 0 )

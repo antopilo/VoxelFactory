@@ -174,7 +174,7 @@ func save():
 	if current_path == "":
 		save_dialog.popup_centered_ratio()
 		return
-		
+	current_file = viewport.meshInstance.mesh
 	# add new meta
 	for vox in viewport.Voxels:
 		current_file.set_meta(str(vox), viewport.Voxels[vox])
