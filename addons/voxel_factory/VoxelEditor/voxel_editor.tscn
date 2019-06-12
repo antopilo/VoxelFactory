@@ -1,23 +1,26 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://addons/voxel_factory/VoxelEditor/voxel_editor.gd" type="Script" id=1]
-[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/open.png" type="Texture" id=2]
-[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/save.png" type="Texture" id=3]
-[ext_resource path="res://addons/voxel_factory/VoxelEditor/tool_group.tres" type="ButtonGroup" id=4]
-[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/pen.png" type="Texture" id=5]
-[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/pen_toggle.png" type="Texture" id=6]
-[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/eraser.png" type="Texture" id=7]
-[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/eraser_toggle.png" type="Texture" id=8]
-[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/hand.png" type="Texture" id=9]
-[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/hand_toggle.png" type="Texture" id=10]
-[ext_resource path="res://addons/voxel_factory/VoxelEditor/editor_view.tscn" type="PackedScene" id=11]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/new_file.png" type="Texture" id=2]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/open.png" type="Texture" id=3]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/save.png" type="Texture" id=4]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/tool_group.tres" type="ButtonGroup" id=5]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/pen.png" type="Texture" id=6]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/pen_toggle.png" type="Texture" id=7]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/eraser.png" type="Texture" id=8]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/eraser_toggle.png" type="Texture" id=9]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/hand.png" type="Texture" id=10]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/hand_toggle.png" type="Texture" id=11]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/color_normal.png" type="Texture" id=12]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/color_toggle.png" type="Texture" id=13]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/1.png" type="Texture" id=14]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/1_toggle.png" type="Texture" id=15]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/2.png" type="Texture" id=16]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/2_toggle.png" type="Texture" id=17]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/editor_view.tscn" type="PackedScene" id=18]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/zoom.png" type="Texture" id=19]
 
-[sub_resource type="Environment" id=1]
-background_energy = 0.0
-ssao_enabled = true
-
-[sub_resource type="World" id=2]
-environment = SubResource( 1 )
+[sub_resource type="World" id=1]
 
 [node name="Voxel Editor" type="Control"]
 anchor_right = 1.0
@@ -32,132 +35,157 @@ anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
-margin_right = 1280.0
+margin_right = 1024.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 0, 25 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
-margin_right = 1280.0
+margin_right = 1024.0
 margin_bottom = 25.0
 
+[node name="new" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+margin_right = 98.0
+margin_bottom = 25.0
+hint_tooltip = "Open a new mesh(.tres)"
+text = "New mesh"
+icon = ExtResource( 2 )
+align = 0
+
 [node name="Button" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_right = 65.0
+margin_left = 102.0
+margin_right = 167.0
 margin_bottom = 25.0
 hint_tooltip = "Open a new mesh(.tres)"
 focus_mode = 0
 text = "Open"
-icon = ExtResource( 2 )
+icon = ExtResource( 3 )
+align = 0
 
 [node name="Button2" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 69.0
-margin_right = 128.0
+margin_left = 171.0
+margin_right = 230.0
 margin_bottom = 25.0
 hint_tooltip = "Save the current mesh"
 focus_mode = 0
 text = "Save"
-icon = ExtResource( 3 )
+icon = ExtResource( 4 )
+align = 0
 
 [node name="Button3" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 132.0
-margin_right = 191.0
+margin_left = 234.0
+margin_right = 293.0
 margin_bottom = 25.0
 hint_tooltip = "Save the current mesh as"
 focus_mode = 0
 text = "Save as"
+align = 0
 
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 195.0
-margin_right = 199.0
+margin_left = 297.0
+margin_right = 301.0
 margin_bottom = 25.0
 
 [node name="PenTool" type="TextureButton" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 203.0
-margin_right = 228.0
+margin_left = 305.0
+margin_right = 330.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 25, 25 )
 hint_tooltip = "Pen tool"
 focus_mode = 0
 toggle_mode = true
 pressed = true
-group = ExtResource( 4 )
-texture_normal = ExtResource( 5 )
-texture_pressed = ExtResource( 6 )
+group = ExtResource( 5 )
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 7 )
 expand = true
 stretch_mode = 3
 
 [node name="EraseTool" type="TextureButton" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 232.0
-margin_right = 257.0
+margin_left = 334.0
+margin_right = 359.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 25, 25 )
 hint_tooltip = "Eraser tool"
 focus_mode = 0
 toggle_mode = true
-group = ExtResource( 4 )
-texture_normal = ExtResource( 7 )
-texture_pressed = ExtResource( 8 )
+group = ExtResource( 5 )
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 9 )
 expand = true
 stretch_mode = 3
 
 [node name="MoveTool" type="TextureButton" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 261.0
-margin_right = 286.0
+margin_left = 363.0
+margin_right = 388.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 25, 25 )
 hint_tooltip = "Move tool"
 focus_mode = 0
 toggle_mode = true
-group = ExtResource( 4 )
-texture_normal = ExtResource( 9 )
-texture_pressed = ExtResource( 10 )
+group = ExtResource( 5 )
+texture_normal = ExtResource( 10 )
+texture_pressed = ExtResource( 11 )
 expand = true
 stretch_mode = 3
 
 [node name="ColorPickerTool" type="TextureButton" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 290.0
-margin_right = 290.0
+margin_left = 392.0
+margin_right = 417.0
 margin_bottom = 25.0
+rect_min_size = Vector2( 25, 25 )
+hint_tooltip = "Color picker
+"
+toggle_mode = true
+shortcut_in_tooltip = false
+group = ExtResource( 5 )
+texture_normal = ExtResource( 12 )
+texture_pressed = ExtResource( 13 )
+expand = true
+stretch_mode = 3
 
 [node name="VSeparator2" type="VSeparator" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 294.0
-margin_right = 298.0
+margin_left = 421.0
+margin_right = 425.0
 margin_bottom = 25.0
 
 [node name="Name" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 302.0
+margin_left = 429.0
 margin_top = 5.0
-margin_right = 340.0
+margin_right = 467.0
 margin_bottom = 19.0
 text = "Name"
 
 [node name="NameEdit" type="LineEdit" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 344.0
-margin_right = 1008.0
+margin_left = 471.0
+margin_right = 987.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 50, 0 )
 hint_tooltip = "The current opened mesh"
 focus_mode = 0
 size_flags_horizontal = 3
+text = "unsaved mesh"
 editable = false
 focus_mode = 0
 context_menu_enabled = false
 caret_blink = true
 
 [node name="VSeparator3" type="VSeparator" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 1012.0
-margin_right = 1016.0
+margin_left = 991.0
+margin_right = 995.0
 margin_bottom = 25.0
 
 [node name="Name2" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 1020.0
+visible = false
+margin_left = 826.0
 margin_top = 5.0
-margin_right = 1085.0
+margin_right = 891.0
 margin_bottom = 19.0
 text = "Voxel size"
 
 [node name="VoxelSize" type="LineEdit" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 1089.0
-margin_right = 1147.0
+visible = false
+margin_left = 833.0
+margin_right = 891.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 50, 0 )
 text = "1"
@@ -165,18 +193,20 @@ align = 1
 context_menu_enabled = false
 
 [node name="HSlider" type="HSlider" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 1151.0
-margin_right = 1251.0
+visible = false
+margin_left = 895.0
+margin_right = 995.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 100, 0 )
 size_flags_vertical = 3
 min_value = 1.0
 max_value = 6.0
 value = 6.0
+ticks_on_borders = true
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 1255.0
-margin_right = 1280.0
+margin_left = 999.0
+margin_right = 1024.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 25, 25 )
 shortcut_in_tooltip = false
@@ -184,71 +214,138 @@ edit_alpha = false
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
 margin_top = 29.0
-margin_right = 1280.0
-margin_bottom = 700.0
+margin_right = 1024.0
+margin_bottom = 576.0
 focus_mode = 2
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer/MarginContainer2"]
-margin_right = 1280.0
-margin_bottom = 671.0
+margin_right = 1024.0
+margin_bottom = 547.0
 focus_mode = 1
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer2/ViewportContainer"]
+margin_right = 25.0
+margin_bottom = 50.0
+
+[node name="1" type="TextureButton" parent="VBoxContainer/MarginContainer2/ViewportContainer/VBoxContainer"]
+margin_right = 25.0
+margin_bottom = 23.0
+hint_tooltip = "Toggle Unshaded"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource( 14 )
+texture_pressed = ExtResource( 15 )
+expand = true
+stretch_mode = 3
+
+[node name="2" type="TextureButton" parent="VBoxContainer/MarginContainer2/ViewportContainer/VBoxContainer"]
+margin_top = 27.0
+margin_right = 25.0
+margin_bottom = 50.0
+hint_tooltip = "Toggle SSAO"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource( 16 )
+texture_pressed = ExtResource( 17 )
+expand = true
+stretch_mode = 3
+
 [node name="Viewport" type="Viewport" parent="VBoxContainer/MarginContainer2/ViewportContainer"]
-size = Vector2( 1280, 671 )
-own_world = true
-world = SubResource( 2 )
+size = Vector2( 1024, 547 )
+world = SubResource( 1 )
 handle_input_locally = false
 hdr = false
 debug_draw = 1
 render_target_update_mode = 3
 gui_snap_controls_to_pixels = false
 
-[node name="Spatial" parent="VBoxContainer/MarginContainer2/ViewportContainer/Viewport" instance=ExtResource( 11 )]
+[node name="Spatial" parent="VBoxContainer/MarginContainer2/ViewportContainer/Viewport" instance=ExtResource( 18 )]
 
 [node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer"]
-margin_top = 704.0
-margin_right = 1280.0
-margin_bottom = 720.0
+margin_top = 580.0
+margin_right = 1024.0
+margin_bottom = 600.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer3"]
-margin_right = 1280.0
-margin_bottom = 16.0
+margin_right = 1024.0
+margin_bottom = 20.0
 alignment = 2
 
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer3/HBoxContainer"]
+margin_top = 3.0
+margin_right = 110.0
+margin_bottom = 17.0
+text = "Background color"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="VBoxContainer/MarginContainer3/HBoxContainer"]
+margin_left = 114.0
+margin_right = 134.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/MarginContainer3/HBoxContainer"]
+margin_left = 138.0
+margin_right = 142.0
+margin_bottom = 20.0
+
+[node name="Spacer" type="Control" parent="VBoxContainer/MarginContainer3/HBoxContainer"]
+margin_left = 146.0
+margin_right = 685.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VSeparator3" type="VSeparator" parent="VBoxContainer/MarginContainer3/HBoxContainer"]
+margin_left = 689.0
+margin_right = 693.0
+margin_bottom = 20.0
+
 [node name="VoxPosition" type="Label" parent="VBoxContainer/MarginContainer3/HBoxContainer"]
-margin_left = 977.0
-margin_top = 1.0
-margin_right = 1118.0
-margin_bottom = 15.0
-text = "Current voxel: (0, 2, 0)"
+margin_left = 697.0
+margin_top = 3.0
+margin_right = 838.0
+margin_bottom = 17.0
+text = "Current voxel: (1, 2, 2)"
 
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/MarginContainer3/HBoxContainer"]
-margin_left = 1122.0
-margin_right = 1126.0
-margin_bottom = 16.0
+margin_left = 842.0
+margin_right = 846.0
+margin_bottom = 20.0
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer3/HBoxContainer"]
+margin_left = 850.0
+margin_right = 870.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+texture = ExtResource( 19 )
+expand = true
+stretch_mode = 4
 
 [node name="ZoomSlider" type="HSlider" parent="VBoxContainer/MarginContainer3/HBoxContainer"]
-margin_left = 1130.0
-margin_right = 1280.0
-margin_bottom = 16.0
+margin_left = 874.0
+margin_right = 1024.0
+margin_bottom = 20.0
 rect_min_size = Vector2( 150, 0 )
 size_flags_vertical = 3
-min_value = 20.0
+min_value = 2.0
 max_value = 120.0
+step = -1.0
 value = 60.0
 ticks_on_borders = true
 
 [node name="OpenDialog" type="FileDialog" parent="."]
 margin_right = 524.0
 margin_bottom = 256.0
-window_title = "Ouvrir un fichier"
+window_title = "Open a File"
 mode = 0
 filters = PoolStringArray( "*.tres" )
 
@@ -257,13 +354,20 @@ margin_right = 526.0
 margin_bottom = 258.0
 filters = PoolStringArray( "*.tres" )
 
+[connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/new" to="." method="_on_new_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/Button" to="." method="_on_Open_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/Button2" to="." method="_on_Save_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/Button3" to="." method="_on_SaveAs_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/PenTool" to="." method="_on_PenTool_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/EraseTool" to="." method="_on_EraseTool_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/MoveTool" to="." method="_on_MoveTool_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/ColorPickerTool" to="." method="_on_ColorPickerTool_pressed"]
 [connection signal="value_changed" from="VBoxContainer/MarginContainer/HBoxContainer/HSlider" to="." method="_on_voxSizeSlider_value_changed"]
 [connection signal="color_changed" from="VBoxContainer/MarginContainer/HBoxContainer/ColorPickerButton" to="." method="_on_ColorPickerButton_color_changed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/ColorPickerButton" to="." method="_on_ColorPickerButton_pressed"]
+[connection signal="toggled" from="VBoxContainer/MarginContainer2/ViewportContainer/VBoxContainer/1" to="." method="_on_1_toggled"]
+[connection signal="toggled" from="VBoxContainer/MarginContainer2/ViewportContainer/VBoxContainer/2" to="." method="_on_2_toggled"]
+[connection signal="color_changed" from="VBoxContainer/MarginContainer3/HBoxContainer/ColorPickerButton" to="." method="_on_sky_color_changed"]
 [connection signal="value_changed" from="VBoxContainer/MarginContainer3/HBoxContainer/ZoomSlider" to="." method="_on_ZoomSlider_value_changed"]
 [connection signal="file_selected" from="OpenDialog" to="." method="_on_OpenDialog_file_selected"]
+[connection signal="file_selected" from="SaveDialog" to="." method="_on_SaveDialog_file_selected"]

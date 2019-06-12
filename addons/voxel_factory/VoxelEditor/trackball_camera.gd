@@ -66,7 +66,15 @@ func _input(ev):
 	if mouseEnabled and ev is InputEventMouseButton:
 		if ev.pressed :
 			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+			_mouseDragStart = getNormalizedMousePosition()
 			
+		else:
+			_mouseDragStart = null
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		_mouseDragPosition = _mouseDragStart
+	elif !mouseEnabled and ev is InputEventMouseButton and ev.get_button_index() == BUTTON_MIDDLE :
+		if ev.pressed :
+			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 			_mouseDragStart = getNormalizedMousePosition()
 			
 		else:

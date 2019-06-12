@@ -11,6 +11,15 @@ var Voxels = {} # Data dictionnary
 func _ready():
 	updatePos()
 
+	var ig = get_node("ImmediateGeometry")
+	ig.set_color(Color(1,0,0))
+	ig.begin(Mesh.PRIMITIVE_LINE_STRIP)
+	ig.set_color(Color(1,0,0))
+	ig.add_vertex(Vector3(0,0,0))
+	ig.set_color(Color(1,0,0))
+	ig.add_vertex(Vector3(0,10,0))
+	ig.end()
+	
 # Reads voxels meta-data from mesh resource.
 func updateVoxels():
 	var mesh = meshInstance.mesh
