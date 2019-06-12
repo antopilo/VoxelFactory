@@ -32,20 +32,11 @@ extends Camera
 # Seriously, useful feedback is always appreciated – we can't test everything.
 
 export var mouseEnabled			= true
-export var mouseInvert			= false
 export var mouseStrength		= 1.111
-export var keyboardEnabled		= true
-export var keyboardInvert		= false
-export var keyboardStrength		= 1.111
-export var joystickEnabled		= true
-export var joystickInvert		= false
-export var joystickStrength		= 1.111
-export var joystickThreshold	= 0.09	# the resting state of my joystick's x-axis is -0.05 T.T
-export var joystickDevice		= 0
 export var inertiaStrength		= 1.0	# multiplier applied to all strengths
 export(float, 0, 1, 0.005) var friction	= 0.07
 
-var _iKnowWhatIAmDoing = false	# should we skip assertions?
+
 var _cameraUp = Vector3(0, 1, 0)
 var _cameraRight = Vector3(1, 0, 0)
 var _epsilon = 0.0001
@@ -58,7 +49,7 @@ func _ready():
 	# It's best to catch future divisions by 0 before they happen.
 	# Note that we don't need this check if the mouse support is disabled.
 	# In case you know what you're doing, there's a property you can change.
-	assert _iKnowWhatIAmDoing or get_viewport().get_visible_rect().get_area()
+	assert get_viewport().get_visible_rect().get_area()
 	#print("Trackball Camera around %s is ready. ♥" % get_parent().get_name())
 	set_process_input(true)
 	
@@ -84,24 +75,12 @@ func _input(ev):
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-func _process(delta):
+func _process(_delta):
 	if mouseEnabled and _mouseDragPosition != null:
 		var _currentDragPosition = getNormalizedMousePosition()
 		_dragInertia += (_currentDragPosition - _mouseDragPosition) \
-						* mouseStrength * (-0.1 if mouseInvert else 0.1)
+						* mouseStrength * 0.1
 		_mouseDragPosition = _currentDragPosition
-
-	if keyboardEnabled:
-		var key_i = -1 if keyboardInvert else 1
-		var key_s = keyboardStrength / 1000.0	# exported floats get truncated
-		if Input.is_key_pressed(KEY_LEFT):
-			_dragInertia += Vector2(key_i * key_s, 0)
-		if Input.is_key_pressed(KEY_RIGHT):
-			_dragInertia += Vector2(-1 * key_i * key_s, 0)
-		if Input.is_key_pressed(KEY_UP):
-			_dragInertia += Vector2(0, key_i * key_s)
-		if Input.is_key_pressed(KEY_DOWN):
-			_dragInertia += Vector2(0, -1 * key_i * key_s)
 
 	var inertia = _dragInertia.length()
 	if inertia > _epsilon:

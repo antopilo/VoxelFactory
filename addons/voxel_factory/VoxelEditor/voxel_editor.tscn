@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://addons/voxel_factory/VoxelEditor/voxel_editor.gd" type="Script" id=1]
 [ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/new_file.png" type="Texture" id=2]
@@ -14,12 +14,14 @@
 [ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/hand_toggle.png" type="Texture" id=12]
 [ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/color_normal.png" type="Texture" id=13]
 [ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/color_toggle.png" type="Texture" id=14]
-[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/1.png" type="Texture" id=15]
-[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/1_toggle.png" type="Texture" id=16]
-[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/2.png" type="Texture" id=17]
-[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/2_toggle.png" type="Texture" id=18]
-[ext_resource path="res://addons/voxel_factory/VoxelEditor/editor_view.tscn" type="PackedScene" id=19]
-[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/zoom.png" type="Texture" id=20]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/anchor.png" type="Texture" id=15]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/anchor_toggle.png" type="Texture" id=16]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/1.png" type="Texture" id=17]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/1_toggle.png" type="Texture" id=18]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/2.png" type="Texture" id=19]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/2_toggle.png" type="Texture" id=20]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/editor_view.tscn" type="PackedScene" id=21]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/icons/zoom.png" type="Texture" id=22]
 
 [sub_resource type="World" id=1]
 
@@ -153,20 +155,35 @@ texture_pressed = ExtResource( 14 )
 expand = true
 stretch_mode = 3
 
-[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="anchorTool" type="TextureButton" parent="VBoxContainer/MarginContainer/HBoxContainer"]
 margin_left = 260.0
-margin_right = 264.0
+margin_right = 285.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 25, 25 )
+hint_tooltip = "Color picker
+"
+toggle_mode = true
+shortcut_in_tooltip = false
+group = ExtResource( 6 )
+texture_normal = ExtResource( 15 )
+texture_pressed = ExtResource( 16 )
+expand = true
+stretch_mode = 3
+
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+margin_left = 289.0
+margin_right = 293.0
 margin_bottom = 25.0
 
 [node name="Name" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 268.0
+margin_left = 297.0
 margin_top = 5.0
-margin_right = 306.0
+margin_right = 335.0
 margin_bottom = 19.0
 text = "Name"
 
 [node name="NameEdit" type="LineEdit" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 310.0
+margin_left = 339.0
 margin_right = 892.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 50, 0 )
@@ -186,16 +203,16 @@ margin_bottom = 25.0
 
 [node name="Name2" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer"]
 visible = false
-margin_left = 930.0
+margin_left = 835.0
 margin_top = 5.0
-margin_right = 995.0
+margin_right = 900.0
 margin_bottom = 19.0
 text = "Voxel size"
 
 [node name="VoxelSize" type="LineEdit" parent="VBoxContainer/MarginContainer/HBoxContainer"]
 visible = false
-margin_left = 833.0
-margin_right = 891.0
+margin_left = 842.0
+margin_right = 900.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 50, 0 )
 text = "1"
@@ -228,6 +245,7 @@ margin_bottom = 25.0
 rect_min_size = Vector2( 29, 25 )
 shortcut_in_tooltip = false
 flat = true
+color = Color( 1, 0.447059, 0.447059, 1 )
 edit_alpha = false
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
@@ -259,8 +277,8 @@ hint_tooltip = "Toggle shading"
 size_flags_horizontal = 3
 size_flags_vertical = 3
 toggle_mode = true
-texture_normal = ExtResource( 15 )
-texture_pressed = ExtResource( 16 )
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 18 )
 expand = true
 stretch_mode = 3
 
@@ -272,21 +290,20 @@ hint_tooltip = "Toggle SSAO"
 size_flags_horizontal = 3
 size_flags_vertical = 3
 toggle_mode = true
-texture_normal = ExtResource( 17 )
-texture_pressed = ExtResource( 18 )
+texture_normal = ExtResource( 19 )
+texture_pressed = ExtResource( 20 )
 expand = true
 stretch_mode = 3
 
 [node name="Viewport" type="Viewport" parent="VBoxContainer/MarginContainer2/ViewportContainer"]
 size = Vector2( 1024, 547 )
+own_world = true
 world = SubResource( 1 )
 handle_input_locally = false
-hdr = false
-debug_draw = 1
 render_target_update_mode = 3
 gui_snap_controls_to_pixels = false
 
-[node name="Spatial" parent="VBoxContainer/MarginContainer2/ViewportContainer/Viewport" instance=ExtResource( 19 )]
+[node name="Spatial" parent="VBoxContainer/MarginContainer2/ViewportContainer/Viewport" instance=ExtResource( 21 )]
 
 [node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer"]
 margin_top = 580.0
@@ -300,23 +317,24 @@ alignment = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/MarginContainer3/HBoxContainer"]
 margin_top = 3.0
-margin_right = 110.0
+margin_right = 114.0
 margin_bottom = 17.0
-text = "Background color"
+text = "Background color:"
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="VBoxContainer/MarginContainer3/HBoxContainer"]
-margin_left = 114.0
-margin_right = 134.0
+margin_left = 118.0
+margin_right = 146.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 20, 20 )
+rect_min_size = Vector2( 28, 20 )
+flat = true
 
 [node name="VSeparator2" type="VSeparator" parent="VBoxContainer/MarginContainer3/HBoxContainer"]
-margin_left = 138.0
-margin_right = 142.0
+margin_left = 150.0
+margin_right = 154.0
 margin_bottom = 20.0
 
 [node name="Spacer" type="Control" parent="VBoxContainer/MarginContainer3/HBoxContainer"]
-margin_left = 146.0
+margin_left = 158.0
 margin_right = 685.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
@@ -332,7 +350,7 @@ margin_left = 697.0
 margin_top = 3.0
 margin_right = 838.0
 margin_bottom = 17.0
-text = "Current voxel: (1, 2, 2)"
+text = "Current voxel: (0, 0, 0)"
 
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/MarginContainer3/HBoxContainer"]
 margin_left = 842.0
@@ -344,7 +362,7 @@ margin_left = 850.0
 margin_right = 870.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 20, 20 )
-texture = ExtResource( 20 )
+texture = ExtResource( 22 )
 expand = true
 stretch_mode = 4
 
@@ -357,7 +375,7 @@ size_flags_vertical = 3
 min_value = 2.0
 max_value = 120.0
 step = -1.0
-value = 60.0
+value = 20.0
 ticks_on_borders = true
 
 [node name="OpenDialog" type="FileDialog" parent="."]
@@ -380,6 +398,7 @@ filters = PoolStringArray( "*.tres" )
 [connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/EraseTool" to="." method="_on_EraseTool_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/MoveTool" to="." method="_on_MoveTool_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/ColorPickerTool" to="." method="_on_ColorPickerTool_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/anchorTool" to="." method="_on_anchorTool_pressed"]
 [connection signal="value_changed" from="VBoxContainer/MarginContainer/HBoxContainer/HSlider" to="." method="_on_voxSizeSlider_value_changed"]
 [connection signal="color_changed" from="VBoxContainer/MarginContainer/HBoxContainer/ColorPickerButton" to="." method="_on_ColorPickerButton_color_changed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/ColorPickerButton" to="." method="_on_ColorPickerButton_pressed"]

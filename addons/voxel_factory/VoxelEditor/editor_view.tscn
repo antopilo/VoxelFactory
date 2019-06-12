@@ -5,8 +5,6 @@
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
-background_color = Color( 0.498039, 0.137255, 0.137255, 1 )
-background_energy = 0.0
 ambient_light_color = Color( 1, 1, 1, 1 )
 ambient_light_sky_contribution = 0.0
 ss_reflections_enabled = true
@@ -22,7 +20,6 @@ glow_intensity = 0.56
 
 [sub_resource type="SpatialMaterial" id=2]
 flags_transparent = true
-flags_unshaded = true
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
 params_depth_draw_mode = 1
@@ -42,11 +39,11 @@ transform = Transform( 1, 0, 0, 0, 0.13327, 0.99108, 0, -0.99108, 0.13327, 1.907
 shadow_enabled = true
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( -0.589507, 0.584533, -0.55749, -0.57355, 0.183076, 0.798446, 0.568783, 0.790443, 0.227336, -11.1499, 15.969, 4.54672 )
+transform = Transform( 0.999992, 0, 0, 0, 0.999993, 0, 0, 0, 0.999994, 0, 0, 20 )
 environment = SubResource( 1 )
 current = true
-fov = 75.0
-far = 146.0
+size = 8.0
+far = 4253.9
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
@@ -55,6 +52,7 @@ __meta__ = {
 [node name="MeshInstance" type="MeshInstance" parent="."]
 
 [node name="cursor" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 0.5 )
 
 [node name="cursor" type="CSGBox" parent="cursor"]
 width = 1.01
@@ -62,10 +60,18 @@ height = 1.01
 depth = 1.01
 material = SubResource( 2 )
 
-[node name="ImmediateGeometry" type="ImmediateGeometry" parent="."]
+[node name="cursorOutline" type="ImmediateGeometry" parent="cursor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, -0.5 )
+
+[node name="Axis" type="Spatial" parent="."]
+editor/display_folded = true
+
+[node name="X" type="ImmediateGeometry" parent="Axis"]
 material_override = SubResource( 3 )
 
-[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
-update_mode = 1
-extents = Vector3( 4.31331, 3.62837, 4.90789 )
+[node name="Y" type="ImmediateGeometry" parent="Axis"]
+material_override = SubResource( 3 )
+
+[node name="Z" type="ImmediateGeometry" parent="Axis"]
+material_override = SubResource( 3 )
 
