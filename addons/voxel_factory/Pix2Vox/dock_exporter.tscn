@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://addons/voxel_factory/dock_exporter.gd" type="Script" id=1]
+[ext_resource path="res://addons/voxel_factory/Pix2Vox/dock_exporter.gd" type="Script" id=1]
 [ext_resource path="res://addons/voxel_factory/voxel_factory.gd" type="Script" id=2]
 
 [node name="Pix2Vox" type="Control"]
@@ -17,7 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer"]
-margin_right = 1280.0
+margin_right = 1024.0
 margin_bottom = 75.0
 rect_min_size = Vector2( 0, 75 )
 custom_constants/margin_right = 15
@@ -28,27 +28,27 @@ custom_constants/margin_bottom = 15
 [node name="Button" type="Button" parent="Panel/VBoxContainer/MarginContainer"]
 margin_left = 15.0
 margin_top = 15.0
-margin_right = 1265.0
+margin_right = 1009.0
 margin_bottom = 60.0
 text = "Open file"
 
 [node name="MarginContainer2" type="MarginContainer" parent="Panel/VBoxContainer"]
 margin_top = 79.0
-margin_right = 1280.0
-margin_bottom = 641.0
+margin_right = 1024.0
+margin_bottom = 521.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="TextureRect" type="TextureRect" parent="Panel/VBoxContainer/MarginContainer2"]
-margin_right = 1280.0
-margin_bottom = 562.0
+margin_right = 1024.0
+margin_bottom = 442.0
 expand = true
 stretch_mode = 6
 
 [node name="MarginContainer3" type="MarginContainer" parent="Panel/VBoxContainer"]
-margin_top = 645.0
-margin_right = 1280.0
-margin_bottom = 720.0
+margin_top = 525.0
+margin_right = 1024.0
+margin_bottom = 600.0
 rect_min_size = Vector2( 0, 75 )
 custom_constants/margin_right = 15
 custom_constants/margin_top = 15
@@ -58,7 +58,7 @@ custom_constants/margin_bottom = 15
 [node name="Button" type="Button" parent="Panel/VBoxContainer/MarginContainer3"]
 margin_left = 15.0
 margin_top = 15.0
-margin_right = 1265.0
+margin_right = 1009.0
 margin_bottom = 60.0
 text = "Export"
 
@@ -71,21 +71,21 @@ rect_min_size = Vector2( 200, 340 )
 resizable = true
 access = 2
 filters = PoolStringArray( "*.tres" )
-current_dir = "C:/Users/Antoine/Desktop/Pix2Mesh"
-current_path = "C:/Users/Antoine/Desktop/Pix2Mesh/"
+current_dir = "F:/Desktop/VoxShowcase"
+current_path = "F:/Desktop/VoxShowcase/"
 
 [node name="FileDialog" type="FileDialog" parent="."]
 margin_left = 14.0
 margin_top = 90.0
 margin_right = 770.0
 margin_bottom = 467.0
-window_title = "Ouvrir un fichier"
+window_title = "Open a File"
 dialog_text = "Open image"
 mode = 0
 access = 2
 filters = PoolStringArray( "*.png" )
-current_dir = "C:/Users/Antoine/Desktop/Pix2Mesh"
-current_path = "C:/Users/Antoine/Desktop/Pix2Mesh/"
+current_dir = "F:/Desktop/VoxShowcase"
+current_path = "F:/Desktop/VoxShowcase/"
 
 [node name="VoxelFactory" type="Node" parent="."]
 script = ExtResource( 2 )

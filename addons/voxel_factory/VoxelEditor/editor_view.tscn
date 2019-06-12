@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/editor_view.gd" type="Script" id=1]
+[ext_resource path="res://addons/voxel_factory/VoxelEditor/trackball_camera.gd" type="Script" id=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_depth_draw_mode = 1
+params_line_width = 70.0
+params_point_size = 0.1
+albedo_color = Color( 0, 0, 0, 0 )
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( -0.477865, 0.790129, -0.383846, 0.811189, 0.229257, -0.537968, -0.337066, -0.56845, -0.7505, -3.07077, -4.30374, -6.004 )
+current = true
+fov = 75.0
+far = 146.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+
+[node name="cursor" type="Spatial" parent="."]
+
+[node name="cursor" type="CSGBox" parent="cursor"]
+width = 1.01
+height = 1.01
+depth = 1.01
+material = SubResource( 1 )
+

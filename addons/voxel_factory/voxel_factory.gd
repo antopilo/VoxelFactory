@@ -1,5 +1,5 @@
 extends Node
-
+tool
 # ------ Voxel Factory -----
 #
 # I recommend putting this script in your autoloads
@@ -13,7 +13,7 @@ extends Node
 # Thank you for downloading Voxel factory.
 # If you need help you can message me on the discord: 
 #                                                     @Kreptic
-var VoxelSize = 1
+var VoxelSize = 1.0
 var DefaultMaterial = SpatialMaterial.new()
 var Voxels = {} # Data in the factory
 var Surfacetool = SurfaceTool.new()
@@ -36,12 +36,13 @@ func update_vertices():
 func _ready():
 	# Making sure that vertex color are used
 	DefaultMaterial.vertex_color_use_as_albedo = true
-
+	DefaultMaterial.vertex_color_is_srgb = true
+	DefaultMaterial.flags_transparent = true
+	
 # Adds a voxel to the dict.
 func add_voxel(position, color):
 	if color.a == 0:
 		return
-		
 	Voxels[position] = color
 
 func clear_voxels():
@@ -74,15 +75,25 @@ func create_mesh_from_image(image) -> Mesh:
 # Starts the creation of the mesh
 func create_mesh() -> ArrayMesh:
 	Surfacetool.begin(Mesh.PRIMITIVE_TRIANGLES)
+	
+	DefaultMaterial.vertex_color_use_as_albedo = true
+	DefaultMaterial.vertex_color_is_srgb = true
 	Surfacetool.set_material(DefaultMaterial)
 	
 	# Creating the mesh...
 	for vox in Voxels:
 		create_voxel(Voxels[vox], vox)
-	
+
 	# Finalise the mesh and return.
 	Surfacetool.index()
-	return Surfacetool.commit() 
+	var mesh = Surfacetool.commit()
+
+	# add meta data to resource for the editor.
+	for vox in Voxels:
+		mesh.set_meta(str(vox), Voxels[vox])
+	mesh.set_meta("voxel_size", VoxelSize)
+	Surfacetool.clear()
+	return mesh 
 
 # Decides where to put faces on the mesh.
 # Checks if there is an adjacent block before place a face.
@@ -95,7 +106,7 @@ func create_voxel(color, position):
 	var top = Voxels.get(position + Vector3(0, 1, 0)) == null
 	
 	# Stop if the block is completly hidden.
-	if(left and right and top and bottom and front and back):
+	if(!left and !right and !top and !bottom and !front and !back):
 		return
 	
 	Surfacetool.add_color(color)

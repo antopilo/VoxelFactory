@@ -20,7 +20,8 @@ func exportMesh(dir):
 	print("saved at: " + dir)
 	for vox in voxelFactory.Voxels:
 		mesh.set_meta(str(vox), voxelFactory.Voxels[vox])
-		
+	
+	mesh.set_meta("voxel_size", voxelFactory.VoxelSize)
 	ResourceSaver.save(dir, mesh)
 	
 # Load Dialog
