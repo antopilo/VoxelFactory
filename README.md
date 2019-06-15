@@ -2,7 +2,8 @@
 
 > Voxel Factory is a simple Godot C# library that allows you to create voxel mesh easily using cubes. It handles the meshing for you and optimize it. 
 
-
+## Voxel editor
+The plugins also comes with a voxel editor where you can create your own voxel models from godot. This is a good alternative if you are using magica voxel for small models. I don't recommended editing big models with this plugin as it is not suited yet for big mesh. The voxel editor can open **.vox** files from magica voxel without any problem atm. The only downside is that all change made from the voxel editor will not apply on the vox file directly. I'm currently storing the changes as meta-data on the file and not in binary format.
 
 ## Usage
 
