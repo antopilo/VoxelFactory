@@ -3,9 +3,11 @@ extends Control
 
 var fs = null
 var current_file = null
+var centered = false
 onready var preview = get_node("Panel/VBoxContainer/MarginContainer2/TextureRect")
 onready var openButton = get_node("Panel/VBoxContainer/MarginContainer/Button")
-onready var exportButton = get_node("Panel/VBoxContainer/MarginContainer3/Button")
+onready var exportButton = get_node("Panel/VBoxContainer/MarginContainer4/Button")
+onready var centerButton = get_node("Panel/VBoxContainer/MarginContainer3/HBoxContainer/OptionButton")
 onready var fileDialog = get_node("FileDialog")
 onready var exportDialog = get_node("SaveDialog")
 onready var voxelFactory = get_node("VoxelFactory")
@@ -16,7 +18,8 @@ func _on_OpenButton_Pressed():
 
 # C# call
 func exportMesh(dir):
-	var mesh = voxelFactory.create_mesh_from_image_file(current_file)
+	centered = centerButton.selected
+	var mesh = voxelFactory.create_mesh_from_image_file(current_file, centered)
 	print("saved at: " + dir)
 	for vox in voxelFactory.Voxels:
 		mesh.set_meta(str(vox), voxelFactory.Voxels[vox])
@@ -49,3 +52,5 @@ func _on_Button_pressed():
 		
 func _on_SaveDialog_file_selected(path):
 	exportMesh(path)
+
+
