@@ -37,7 +37,7 @@ func _ready():
 	# Making sure that vertex color are used
 	DefaultMaterial.vertex_color_use_as_albedo = true
 	DefaultMaterial.vertex_color_is_srgb = true
-	DefaultMaterial.flags_transparent = true
+	#DefaultMaterial.flags_transparent = true
 	
 # Adds a voxel to the dict.
 func add_voxel(position, color):
@@ -49,24 +49,30 @@ func clear_voxels():
 	Voxels.clear()
 
 # From image file.
-func create_mesh_from_image_file(path) -> Mesh:
+func create_mesh_from_image_file(path, centered) -> Mesh:
 	var image = Image.new()
 	image.load(path)
-	return create_mesh_from_image(image)
+	return create_mesh_from_image(image, centered)
 
 # From image data-type
-func create_mesh_from_image(image) -> Mesh:
+func create_mesh_from_image(image, centered) -> Mesh:
 	Voxels.clear()
 	var imageSize = image.get_size()
-	
+	var imageWidth = image.get_width()
+	var imageHeight = image.get_height()
+	var offset = Vector3()
 	# Image is upside down by default.
 	image.flip_y()
 	image.lock()
 	
+	if centered == 1: #if only xz centered
+		offset = Vector3(imageWidth/2, 0, VoxelSize/2)#set offset based off half the size of a voxel and the image size
+	elif centered == 2: #if xyz centered
+		offset = Vector3(imageWidth/2, imageHeight/2, VoxelSize/2)
 	# For each pixel add a voxel.
 	for x in imageSize.x:
 		for y in imageSize.y:
-			add_voxel(Vector3(x, y, 0), image.get_pixel(x, y))
+			add_voxel(Vector3(x, y, 0)-offset, image.get_pixel(x, y))
 	
 	image.unlock()
 	return create_mesh()
