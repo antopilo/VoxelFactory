@@ -120,68 +120,70 @@ public class VoxelFactory
             return;
 
         SurfaceTool.AddColor(color);
+
+        void addVertex(Vector3 pos) => SurfaceTool.AddVertex(pos * VoxelSize); 
                 
         Vector3 vertexOffset = position;
         if (top) // Above
         {
             SurfaceTool.AddNormal(new Vector3(0, -1, 0));
-            SurfaceTool.AddVertex(Vertices[4] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[5] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[7] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[5] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[6] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[7] + vertexOffset);
+            addVertex(Vertices[4] + vertexOffset);
+            addVertex(Vertices[5] + vertexOffset);
+            addVertex(Vertices[7] + vertexOffset);
+            addVertex(Vertices[5] + vertexOffset);
+            addVertex(Vertices[6] + vertexOffset);
+            addVertex(Vertices[7] + vertexOffset);
         }
         if (right) // Right
         {
             SurfaceTool.AddNormal(new Vector3(1, 0, 0));
-            SurfaceTool.AddVertex(Vertices[2] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[5] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[1] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[2] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[6] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[5] + vertexOffset);
+            addVertex(Vertices[2] + vertexOffset);
+            addVertex(Vertices[5] + vertexOffset);
+            addVertex(Vertices[1] + vertexOffset);
+            addVertex(Vertices[2] + vertexOffset);
+            addVertex(Vertices[6] + vertexOffset);
+            addVertex(Vertices[5] + vertexOffset);
             
         }
         if (left) // Left
         {
             SurfaceTool.AddNormal(new Vector3(-1, 0, 0));
-            SurfaceTool.AddVertex(Vertices[0] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[7] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[3] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[0] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[4] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[7] + vertexOffset);
+            addVertex(Vertices[0] + vertexOffset);
+            addVertex(Vertices[7] + vertexOffset);
+            addVertex(Vertices[3] + vertexOffset);
+            addVertex(Vertices[0] + vertexOffset);
+            addVertex(Vertices[4] + vertexOffset);
+            addVertex(Vertices[7] + vertexOffset);
         }
         if (front) // Front
         {
             SurfaceTool.AddNormal(new Vector3(0, 0, 1));
-            SurfaceTool.AddVertex(Vertices[3] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[6] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[2] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[3] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[7] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[6] + vertexOffset);
+            addVertex(Vertices[3] + vertexOffset);
+            addVertex(Vertices[6] + vertexOffset);
+            addVertex(Vertices[2] + vertexOffset);
+            addVertex(Vertices[3] + vertexOffset);
+            addVertex(Vertices[7] + vertexOffset);
+            addVertex(Vertices[6] + vertexOffset);
         }
         if (back) // Above
         {
             SurfaceTool.AddNormal(new Vector3(0, 0, -1));
-            SurfaceTool.AddVertex(Vertices[0] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[1] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[5] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[5] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[4] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[0] + vertexOffset);
+            addVertex(Vertices[0] + vertexOffset);
+            addVertex(Vertices[1] + vertexOffset);
+            addVertex(Vertices[5] + vertexOffset);
+            addVertex(Vertices[5] + vertexOffset);
+            addVertex(Vertices[4] + vertexOffset);
+            addVertex(Vertices[0] + vertexOffset);
         }
         if (bottom)
         {
             SurfaceTool.AddNormal(new Vector3(0, 1, 0));
-            SurfaceTool.AddVertex(Vertices[1] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[3] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[2] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[1] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[0] + vertexOffset);
-            SurfaceTool.AddVertex(Vertices[3] + vertexOffset);
+            addVertex(Vertices[1] + vertexOffset);
+            addVertex(Vertices[3] + vertexOffset);
+            addVertex(Vertices[2] + vertexOffset);
+            addVertex(Vertices[1] + vertexOffset);
+            addVertex(Vertices[0] + vertexOffset);
+            addVertex(Vertices[3] + vertexOffset);
         }
     } 
 }
