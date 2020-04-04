@@ -13,25 +13,18 @@ tool
 # Thank you for downloading Voxel factory.
 # If you need help you can message me on the discord: 
 #                                                     @Kreptic
-var VoxelSize = 1.0
+export(float) var VoxelSize = 1.0
 var DefaultMaterial = SpatialMaterial.new()
 var Voxels = {} # Data in the factory
 var Surfacetool = SurfaceTool.new()
 
 # Vertices of a cube
 var Vertices = [
-	Vector3(0,0,0), Vector3(VoxelSize,0,0),
-	Vector3(VoxelSize,0,VoxelSize), Vector3(0,0,VoxelSize),
-	Vector3(0,VoxelSize,0), Vector3(VoxelSize,VoxelSize,0),
-	Vector3(VoxelSize,VoxelSize,VoxelSize), Vector3(0,VoxelSize,VoxelSize) ]
-
-func update_vertices():
-	Vertices = [
-		Vector3(0,0,0), Vector3(VoxelSize,0,0),
-		Vector3(VoxelSize,0,VoxelSize), Vector3(0,0,VoxelSize),
-		Vector3(0,VoxelSize,0), Vector3(VoxelSize,VoxelSize,0),
-		Vector3(VoxelSize,VoxelSize,VoxelSize), Vector3(0,VoxelSize,VoxelSize) 
-	]
+	Vector3(0,0,0), Vector3(1,0,0),
+	Vector3(1,0,1), Vector3(0,0,1),
+	Vector3(0,1,0), Vector3(1,1,0),
+	Vector3(1,1,1), Vector3(0,1,1) 
+]
 
 func _ready():
 	# Making sure that vertex color are used
@@ -119,52 +112,52 @@ func create_voxel(color, position):
 	
 	if top:
 		Surfacetool.add_normal(Vector3(0, -1, 0))
-		Surfacetool.add_vertex(Vertices[4] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[5] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[7] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[5] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[6] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[7] + position * VoxelSize)
+		Surfacetool.add_vertex((Vertices[4] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[5] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[7] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[5] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[6] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[7] + position) * VoxelSize)
 	if right:
 		Surfacetool.add_normal(Vector3(1, 0, 0))
-		Surfacetool.add_vertex(Vertices[2] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[5] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[1] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[2] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[6] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[5] + position * VoxelSize)
+		Surfacetool.add_vertex((Vertices[2] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[5] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[1] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[2] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[6] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[5] + position) * VoxelSize)
 	if left:
 		Surfacetool.add_normal(Vector3(-1, 0, 0))
-		Surfacetool.add_vertex(Vertices[0] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[7] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[3] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[0] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[4] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[7] + position * VoxelSize)
+		Surfacetool.add_vertex((Vertices[0] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[7] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[3] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[0] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[4] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[7] + position) * VoxelSize)
 	if front:
 		Surfacetool.add_normal(Vector3(0, 0, 1))
-		Surfacetool.add_vertex(Vertices[6] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[2] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[3] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[3] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[7] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[6] + position * VoxelSize)
+		Surfacetool.add_vertex((Vertices[6] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[2] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[3] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[3] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[7] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[6] + position) * VoxelSize)
 	if back:
 		Surfacetool.add_normal(Vector3(0, 0, -1))
-		Surfacetool.add_vertex(Vertices[0] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[1] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[5] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[5] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[4] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[0] + position * VoxelSize)
+		Surfacetool.add_vertex((Vertices[0] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[1] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[5] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[5] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[4] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[0] + position) * VoxelSize)
 	if bottom:
 		Surfacetool.add_normal(Vector3(0, 1, 0))
-		Surfacetool.add_vertex(Vertices[1] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[3] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[2] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[1] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[0] + position * VoxelSize)
-		Surfacetool.add_vertex(Vertices[3] + position * VoxelSize)
+		Surfacetool.add_vertex((Vertices[1] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[3] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[2] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[1] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[0] + position) * VoxelSize)
+		Surfacetool.add_vertex((Vertices[3] + position) * VoxelSize)
 
 	
 	

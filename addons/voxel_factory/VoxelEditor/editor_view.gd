@@ -112,7 +112,6 @@ func remove_voxel(position):
 func updateMesh():
 	factory.clear_voxels()
 	factory.VoxelSize = vox_size
-	factory.update_vertices()
 	
 	for vox in Voxels:
 		factory.add_voxel(vox, Voxels.get(vox))
